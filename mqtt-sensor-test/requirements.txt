@@ -1,0 +1,5 @@
+# requirements.txt
+paho-mqtt==1.6.1
+RPi.GPIO==0.7.1
+adafruit-circuitpython-htu21d==3.7.5
+Adafruit-MCP3008==1.0.0
