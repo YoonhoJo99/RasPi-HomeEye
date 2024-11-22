@@ -2,7 +2,7 @@
 import time
 import RPi.GPIO as GPIO
 import Adafruit_MCP3008
-from . import SensorInterface
+from sensors import SensorInterface
 
 class LightSensor(SensorInterface):
     def __init__(self, clk=11, cs=8, miso=9, mosi=10):

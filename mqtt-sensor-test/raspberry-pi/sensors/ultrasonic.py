@@ -1,7 +1,7 @@
 # sensors/ultrasonic.py
 import time
 import RPi.GPIO as GPIO
-from . import SensorInterface
+from sensors import SensorInterface
 
 class UltrasonicSensor(SensorInterface):
     def __init__(self, trig=20, echo=16):

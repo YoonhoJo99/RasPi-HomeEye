@@ -3,7 +3,7 @@ import time
 import RPi.GPIO as GPIO
 from adafruit_htu21d import HTU21D
 import busio
-from . import SensorInterface
+from sensors import SensorInterface
 
 class HTU21DSensor(SensorInterface):
     def __init__(self, sda=2, scl=3):
