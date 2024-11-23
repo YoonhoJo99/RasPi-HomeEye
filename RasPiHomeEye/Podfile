@@ -1,0 +1,7 @@
+# Podfile
+platform :ios, '16.0'
+
+target 'RasPiHomeEye' do
+  use_frameworks!
+  pod 'CocoaMQTT'
+end

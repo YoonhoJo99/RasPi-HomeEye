@@ -1,0 +1,6 @@
+framework module Pods_RasPiHomeEye {
+  umbrella header "Pods-RasPiHomeEye-umbrella.h"
+
+  export *
+  module * { export * }
+}
