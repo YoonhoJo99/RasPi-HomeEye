@@ -1,0 +1,40 @@
+# Podfile
+platform :ios, '13.0'
+
+target 'RasPiHomeEye' do
+ use_frameworks!
+
+ # MQTT
+ pod 'CocoaMQTT'
+ 
+ # WebSocket
+ pod 'Starscream'
+ 
+ # UI & Layout
+ pod 'SnapKit'
+ pod 'Then'
+ 
+ # 데이터 시각화
+ pod 'Charts'
+ 
+ # Firebase
+ pod 'Firebase/Core'
+ pod 'Firebase/Firestore'
+ pod 'Firebase/Storage'
+ 
+ # 이미지 처리
+ pod 'Kingfisher'
+ 
+ # UI 컴포넌트
+ pod 'JGProgressHUD'
+end
+
+post_install do |installer|
+   installer.generated_projects.each do |project|
+       project.targets.each do |target|
+           target.build_configurations.each do |config|
+               config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+           end
+       end
+   end
+end
