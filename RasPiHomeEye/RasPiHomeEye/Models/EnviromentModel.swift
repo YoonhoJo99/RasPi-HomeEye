@@ -9,6 +9,6 @@ import Foundation
 
 // EnvironmentModel.swift
 struct EnvironmentData {
-    let temperature: String?
-    let humidity: String?
+    let temperature: String? // 온도 데이터
+    let humidity: String? // 습도 데이터
 }
