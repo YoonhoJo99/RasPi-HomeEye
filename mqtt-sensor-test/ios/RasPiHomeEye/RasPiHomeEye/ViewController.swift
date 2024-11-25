@@ -51,8 +51,8 @@ extension ViewController: CocoaMQTTDelegate {
         mqtt.subscribe([
             ("sensors/temperature", CocoaMQTTQoS.qos1),  // 온도 센서 데이터
             ("sensors/humidity", CocoaMQTTQoS.qos1),    // 습도 센서 데이터
-            ("sensors/distance", CocoaMQTTQoS.qos1),    // 초음파 거리 데이터
-            ("sensors/light", CocoaMQTTQoS.qos1)        // 조도 센서 데이터
+//            ("sensors/distance", CocoaMQTTQoS.qos1),    // 초음파 거리 데이터
+//            ("sensors/light", CocoaMQTTQoS.qos1)        // 조도 센서 데이터
         ])
     }
     
