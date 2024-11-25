@@ -11,9 +11,11 @@ import UIKit
 import SnapKit
 import Then
 
+// 실시간 스트리밍 화면을 표시하는 뷰 컨트롤러
 final class LiveStreamViewController: UIViewController {
-    private var viewModel: LiveStreamViewModel!
+    private var viewModel: LiveStreamViewModel! // ViewModel 인스턴스
     
+    // 화면 제목을 표시하는 레이블
     private let nameLabel = UILabel().then {
         $0.text = "LiveStreamView"
         $0.textColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
@@ -21,53 +23,62 @@ final class LiveStreamViewController: UIViewController {
         $0.textAlignment = .center
     }
     
+    // 스트리밍 이미지를 표시하는 이미지 뷰
     private let streamImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.backgroundColor = .black
     }
     
+    // 뷰 로드 시 호출
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupViewModel()
-        configure()
-        addViews()
-        setupConstraints()
+        setupViewModel() // ViewModel 설정
+        configure() // 기본 UI 설정
+        addViews() // 서브뷰 추가
+        setupConstraints() // AutoLayout 제약 조건 설정
     }
     
+    // ViewModel 초기화 및 이미지 업데이트 클로저 설정
+    // EnviromentViewModel 설정과는 다르게 해보았음
     private func setupViewModel() {
         viewModel = LiveStreamViewModel()
         viewModel.onImageUpdated = { [weak self] image in
-            self?.streamImageView.image = image
+            self?.streamImageView.image = image // 이미지 뷰 업데이트
         }
     }
     
+    // 기본 UI 설정 (배경색 설정)
     private func configure() {
         view.backgroundColor = .white
     }
     
+    // 레이블 및 이미지 뷰를 뷰에 추가
     private func addViews() {
         [nameLabel, streamImageView].forEach { view.addSubview($0) }
     }
     
+    // SnapKit을 사용한 AutoLayout 제약 조건 설정
     private func setupConstraints() {
         nameLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(0)
-            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(0) // 상단 안전 영역에 정렬
+            $0.centerX.equalTo(view.safeAreaLayoutGuide) // 가로 중앙 정렬
         }
         
         streamImageView.snp.makeConstraints {
-            $0.top.equalTo(nameLabel.snp.bottom).offset(20)
-            $0.left.right.equalToSuperview().inset(20)
-            $0.height.equalTo(streamImageView.snp.width).multipliedBy(0.75)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(20) // 레이블 아래 정렬
+            $0.left.right.equalToSuperview().inset(20) // 좌우 20만큼 여백
+            $0.height.equalTo(streamImageView.snp.width).multipliedBy(0.75) // 4:3 비율
         }
     }
     
+    // 화면이 나타날 때 WebSocket 연결 시작
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.startStreaming()
     }
     
+    // 화면이 사라질 때 WebSocket 연결 종료
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewModel.stopStreaming()
