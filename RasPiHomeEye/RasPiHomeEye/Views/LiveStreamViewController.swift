@@ -5,13 +5,15 @@
 //  Created by 조윤호 on 11/25/24.
 //
 
+// LiveStreamViewController.swift
+
 import UIKit
 import SnapKit
 import Then
 
 final class LiveStreamViewController: UIViewController {
+    private var viewModel: LiveStreamViewModel!
     
-    // 뷰 선언 구간
     private let nameLabel = UILabel().then {
         $0.text = "LiveStreamView"
         $0.textColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
@@ -19,35 +21,55 @@ final class LiveStreamViewController: UIViewController {
         $0.textAlignment = .center
     }
     
-    //
+    private let streamImageView = UIImageView().then {
+        $0.contentMode = .scaleAspectFit
+        $0.backgroundColor = .black
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupViewModel()
         configure()
         addViews()
         setupConstraints()
-        setupAddTarget()
     }
     
-    // 초기 설정
+    private func setupViewModel() {
+        viewModel = LiveStreamViewModel()
+        viewModel.onImageUpdated = { [weak self] image in
+            self?.streamImageView.image = image
+        }
+    }
+    
     private func configure() {
         view.backgroundColor = .white
     }
     
-    // 서브뷰 추가
     private func addViews() {
-        self.view.addSubview(nameLabel)
+        [nameLabel, streamImageView].forEach { view.addSubview($0) }
     }
     
-    // 오토레이아웃 설정
     private func setupConstraints() {
         nameLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(0)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
         }
+        
+        streamImageView.snp.makeConstraints {
+            $0.top.equalTo(nameLabel.snp.bottom).offset(20)
+            $0.left.right.equalToSuperview().inset(20)
+            $0.height.equalTo(streamImageView.snp.width).multipliedBy(0.75)
+        }
     }
     
-    private func setupAddTarget() {
-        // Add target 설정이 필요한 경우 여기에 구현
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.startStreaming()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.stopStreaming()
     }
 }
