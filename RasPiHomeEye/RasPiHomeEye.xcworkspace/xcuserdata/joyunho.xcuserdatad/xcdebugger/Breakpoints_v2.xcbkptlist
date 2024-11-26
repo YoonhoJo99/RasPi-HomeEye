@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "1D060FE5-1ED2-46CE-BF76-AAE435FAC3AB"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CF27FC7F-5A18-48C6-A8CA-3917167F3390"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RasPiHomeEye/Views/LiveStreamViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "LiveStreamViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "CF27FC7F-5A18-48C6-A8CA-3917167F3390 - 8aef8ba1ed120700"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UILabel) -&gt; () in variable initialization expression of RasPiHomeEye.LiveStreamViewController.nameLabel : __C.UILabel"
+                  moduleName = "RasPiHomeEye.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/joyunho/Desktop/RasPi-HomeEye/RasPiHomeEye/RasPiHomeEye/Views/LiveStreamViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18">
+               </Location>
+               <Location
+                  uuid = "CF27FC7F-5A18-48C6-A8CA-3917167F3390 - 24c5c740082fafae"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RasPiHomeEye.LiveStreamViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; RasPiHomeEye.LiveStreamViewController"
+                  moduleName = "RasPiHomeEye.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/joyunho/Desktop/RasPi-HomeEye/RasPiHomeEye/RasPiHomeEye/Views/LiveStreamViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17">
+               </Location>
+               <Location
+                  uuid = "CF27FC7F-5A18-48C6-A8CA-3917167F3390 - 4e2fecb4cb7044ae"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RasPiHomeEye.LiveStreamViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;RasPiHomeEye.LiveStreamViewController&gt;"
+                  moduleName = "RasPiHomeEye.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/joyunho/Desktop/RasPi-HomeEye/RasPiHomeEye/RasPiHomeEye/Views/LiveStreamViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

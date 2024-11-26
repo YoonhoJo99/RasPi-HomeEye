@@ -11,11 +11,11 @@ import UIKit
 import SnapKit
 import Then
 
-// 실시간 스트리밍 화면을 표시하는 뷰 컨트롤러
 final class LiveStreamViewController: UIViewController {
+    
     private var viewModel: LiveStreamViewModel! // ViewModel 인스턴스
     
-    // 화면 제목을 표시하는 레이블
+    // MARK: - UI Components
     private let nameLabel = UILabel().then {
         $0.text = "LiveStreamView"
         $0.textColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
@@ -29,7 +29,9 @@ final class LiveStreamViewController: UIViewController {
         $0.backgroundColor = .black
     }
     
-    // 뷰 로드 시 호출
+    
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,8 +41,23 @@ final class LiveStreamViewController: UIViewController {
         setupConstraints() // AutoLayout 제약 조건 설정
     }
     
+    // 화면이 나타날 때 WebSocket 연결 시작
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.startStreaming()
+    }
+    
+    // 화면이 사라질 때 WebSocket 연결 종료
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.stopStreaming()
+    }
+    
+    
+    // MARK: - UI Setup
+    
     // ViewModel 초기화 및 이미지 업데이트 클로저 설정
-    // EnviromentViewModel 설정과는 다르게 해보았음
+    // EnviromentViewModel 설정과는 다르게 해보았음 함수로 따로 뻄
     private func setupViewModel() {
         viewModel = LiveStreamViewModel()
         viewModel.onImageUpdated = { [weak self] image in
@@ -70,17 +87,5 @@ final class LiveStreamViewController: UIViewController {
             $0.left.right.equalToSuperview().inset(20) // 좌우 20만큼 여백
             $0.height.equalTo(streamImageView.snp.width).multipliedBy(0.75) // 4:3 비율
         }
-    }
-    
-    // 화면이 나타날 때 WebSocket 연결 시작
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewModel.startStreaming()
-    }
-    
-    // 화면이 사라질 때 WebSocket 연결 종료
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        viewModel.stopStreaming()
     }
 }

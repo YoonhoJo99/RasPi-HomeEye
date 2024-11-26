@@ -12,7 +12,12 @@ import Then
 final class EnvironmentMonitorViewController: UIViewController {
     
     private var viewModel: EnvironmentViewModel!
-    
+    // viewModel이 초기화되지 않은 상태에서는 nil일 수 있음
+    // 그러나 값을 사용하는 시점에는 반드시 값이 존재한다고 가정
+    // 만약, 값을 사용하려고 할 때 실제로 nil이면 런타임 에러가 발생
+
+    // MARK: - UI Components
+
     private let temperatureLabel = UILabel().then {
         $0.text = "Temperature: --"
         $0.font = .systemFont(ofSize: 16)
@@ -23,6 +28,8 @@ final class EnvironmentMonitorViewController: UIViewController {
         $0.font = .systemFont(ofSize: 16)
     }
     
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,7 +54,8 @@ final class EnvironmentMonitorViewController: UIViewController {
         setupConstraints()
     }
     
-    // UI 설정 메서드들...
+    // MARK: - UI Setup
+
     private func configure() {
         view.backgroundColor = .white
     }
@@ -69,6 +77,7 @@ final class EnvironmentMonitorViewController: UIViewController {
 }
 
 /**
+실행흐름
 1. MQTT에서 새 데이터 수신
 2. ViewModel에서 environmentData 업데이트
 3. didSet 호출
@@ -78,5 +87,5 @@ final class EnvironmentMonitorViewController: UIViewController {
 
 /**
  environmentData에 didSet을 두고, 그 didSet이 변경된 enviromentData를 매개변수로 complteted를 호출하고
- complteted메소드 구현은 View에 하여 Viewew에서 UI코드를 업데이트 하도록 구조화한거구나
+ complteted메소드 구현은 View에 하여 Viewew에서 UI코드를 업데이트 하도록 구조화하였음
  */
