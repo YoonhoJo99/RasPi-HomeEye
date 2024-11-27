@@ -17,10 +17,8 @@ target 'RasPiHomeEye' do
  # 데이터 시각화
  pod 'Charts'
  
- # Firebase
- pod 'Firebase/Core'
- pod 'Firebase/Firestore'
- pod 'Firebase/Storage'
+ # 이미지/시각정보 저장
+ pod 'RealmSwift'
  
  # 이미지 처리
  pod 'Kingfisher'
