@@ -100,13 +100,14 @@ extension EventGalleryViewController: UICollectionViewDataSource, UICollectionVi
        return true
    }
    
-   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       let event = events[indexPath.item]
-       if collectionView.isEditing {
-           // 편집 모드에서는 삭제
-           viewModel.deleteEvent(event)
-       } else {
-           // 일반 모드에서는 상세보기 (필요시 구현)
-       }
-   }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let event = events[indexPath.item]
+        if collectionView.isEditing {
+            viewModel.deleteEvent(event)
+        } else {
+            let detailVC = EventDetailViewController(event: event, viewModel: viewModel)
+            detailVC.modalPresentationStyle = .fullScreen
+            present(detailVC, animated: true)
+        }
+    }
 }
