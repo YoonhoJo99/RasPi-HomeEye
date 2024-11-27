@@ -1,3 +1,2 @@
-# RasPi-HomeEye 디렉토리에서
-echo "__pycache__/" >> .gitignore
-echo "*.pyc" >> .gitignore
+echo ".DS_Store" >> .gitignore
+echo "*.xcuserstate" >> .gitignore
