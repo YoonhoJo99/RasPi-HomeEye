@@ -20,12 +20,12 @@ final class EnvironmentMonitorViewController: UIViewController {
 
     private let temperatureLabel = UILabel().then {
         $0.text = "Temperature: --"
-        $0.font = .systemFont(ofSize: 16)
+        $0.font = .systemFont(ofSize: 30)
     }
     
     private let humidityLabel = UILabel().then {
         $0.text = "Humidity: --"
-        $0.font = .systemFont(ofSize: 16)
+        $0.font = .systemFont(ofSize: 30)
     }
     
     // MARK: - Lifecycle

@@ -9,12 +9,17 @@ import UIKit
 import RealmSwift
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .sound])
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         Realm.Configuration.defaultConfiguration = Realm.Configuration(schemaVersion: 1)
-            return true
+        UNUserNotificationCenter.current().delegate = self
+        return true
     }
 
     // MARK: UISceneSession Lifecycle

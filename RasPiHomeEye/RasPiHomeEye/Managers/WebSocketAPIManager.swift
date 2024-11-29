@@ -7,6 +7,7 @@
 import Foundation
 import Starscream
 import RealmSwift
+import UserNotifications
 
 final class WebSocketAPIManager {
     static let shared = WebSocketAPIManager()
@@ -19,7 +20,8 @@ final class WebSocketAPIManager {
     private let realm = try! Realm()
     
     private init() {
-        setupWebSocket()
+        setupWebSocket() // 웹소켓 셋업
+        setupNotification() // 초기화 시 알림 권한 요청
     }
     
     private func setupWebSocket() {
@@ -56,6 +58,7 @@ final class WebSocketAPIManager {
         try? realm.write {
             realm.add(event)
         }
+        sendNotification()
     }
     
     // 데이터 처리
@@ -90,6 +93,28 @@ final class WebSocketAPIManager {
             print("JSON 파싱 에러: \(error)")
         }
     }
+    
+    private func setupNotification() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, _ in
+            print("알림 권한: \(granted)")
+        }
+    }
+    
+    private func sendNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "물체 감지"
+        content.body = "새로운 이벤트가 저장되었습니다."
+        content.sound = .default
+        
+        let request = UNNotificationRequest(
+            identifier: UUID().uuidString,
+            content: content,
+            trigger: nil
+        )
+        
+        UNUserNotificationCenter.current().add(request)
+    }
+        
 }
 
 extension WebSocketAPIManager: WebSocketDelegate {
