@@ -44,13 +44,12 @@ final class LiveStreamViewController: UIViewController {
     // 화면이 나타날 때 WebSocket 연결 시작
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.startStreaming()
+        viewModel.startStream()  // startStreaming -> startStream
     }
-    
-    // 화면이 사라질 때 WebSocket 연결 종료
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewModel.stopStreaming()
+        viewModel.stopStream()   // stopStreaming -> stopStream
     }
     
     

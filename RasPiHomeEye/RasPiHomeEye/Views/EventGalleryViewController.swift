@@ -5,10 +5,9 @@
 //  Created by 조윤호 on 11/25/24.
 //
 
-// Views/EventGalleryViewController.swift
 import UIKit
-import RealmSwift
 
+// EventGalleryViewController.swift
 final class EventGalleryViewController: UIViewController {
    // MARK: - Properties
    private let viewModel = EventGalleryViewModel()
@@ -39,15 +38,11 @@ final class EventGalleryViewController: UIViewController {
        setupViewModel()
        viewModel.fetchEvents()
    }
-   
+    
+   // EventGalleryViewController.swift
    override func viewWillAppear(_ animated: Bool) {
        super.viewWillAppear(animated)
-       viewModel.startConnection()
-   }
-   
-   override func viewWillDisappear(_ animated: Bool) {
-       super.viewWillDisappear(animated)
-       viewModel.stopConnection()
+       viewModel.fetchEvents()  // 화면이 나타날 때마다 데이터 새로 불러오기
    }
    
    // MARK: - Setup
@@ -66,20 +61,10 @@ final class EventGalleryViewController: UIViewController {
            $0.edges.equalTo(view.safeAreaLayoutGuide)
        }
        
-       // 내비게이션 바 설정
        title = "Event Gallery"
-       
-       // 삭제 기능을 위한 편집 버튼 추가
-       navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit",
-                                                         style: .plain,
-                                                         target: self,
-                                                         action: #selector(toggleEditing))
    }
-   
-   @objc private func toggleEditing() {
-       collectionView.isEditing.toggle()
-       navigationItem.rightBarButtonItem?.title = collectionView.isEditing ? "Done" : "Edit"
-   }
+    
+
 }
 
 // MARK: - UICollectionView DataSource & Delegate
@@ -95,19 +80,10 @@ extension EventGalleryViewController: UICollectionViewDataSource, UICollectionVi
        return cell
    }
    
-   // 셀 삭제 구현
-   func collectionView(_ collectionView: UICollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
-       return true
+   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       let event = events[indexPath.item]
+       let detailVC = EventDetailViewController(event: event, viewModel: viewModel)
+       detailVC.modalPresentationStyle = .fullScreen
+       present(detailVC, animated: true)
    }
-   
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let event = events[indexPath.item]
-        if collectionView.isEditing {
-            viewModel.deleteEvent(event)
-        } else {
-            let detailVC = EventDetailViewController(event: event, viewModel: viewModel)
-            detailVC.modalPresentationStyle = .fullScreen
-            present(detailVC, animated: true)
-        }
-    }
 }

@@ -59,6 +59,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 기본루트뷰를 탭바컨트롤러로 설정⭐️⭐️⭐️
         window?.rootViewController = tabBarVC
         window?.makeKeyAndVisible() // 몰라도 됨. 우리가 코드로 UI를 만들 때 사용하는 코드. 외우지 마!
+        
+        // 앱 시작시 WebSocket 연결
+        WebSocketAPIManager.shared.startConnection()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
