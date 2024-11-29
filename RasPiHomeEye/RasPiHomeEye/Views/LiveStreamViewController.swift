@@ -16,12 +16,12 @@ final class LiveStreamViewController: UIViewController {
     private var viewModel: LiveStreamViewModel! // ViewModel 인스턴스
     
     // MARK: - UI Components
-    private let nameLabel = UILabel().then {
-        $0.text = "LiveStreamView"
-        $0.textColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
-        $0.font = .systemFont(ofSize: 20, weight: .heavy)
-        $0.textAlignment = .center
-    }
+//    private let nameLabel = UILabel().then {
+//        $0.text = "LiveStreamView"
+//        $0.textColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
+//        $0.font = .systemFont(ofSize: 20, weight: .heavy)
+//        $0.textAlignment = .center
+//    }
     
     // 스트리밍 이미지를 표시하는 이미지 뷰
     private let streamImageView = UIImageView().then {
@@ -47,11 +47,11 @@ final class LiveStreamViewController: UIViewController {
         viewModel.startStream()  // startStreaming -> startStream
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        viewModel.stopStream()   // stopStreaming -> stopStream
-    }
-    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        viewModel.stopStream()   // stopStreaming -> stopStream
+//    }
+//    
     
     // MARK: - UI Setup
     
@@ -71,20 +71,20 @@ final class LiveStreamViewController: UIViewController {
     
     // 레이블 및 이미지 뷰를 뷰에 추가
     private func addViews() {
-        [nameLabel, streamImageView].forEach { view.addSubview($0) }
+        [streamImageView].forEach { view.addSubview($0) }
     }
     
     // SnapKit을 사용한 AutoLayout 제약 조건 설정
     private func setupConstraints() {
-        nameLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(0) // 상단 안전 영역에 정렬
-            $0.centerX.equalTo(view.safeAreaLayoutGuide) // 가로 중앙 정렬
-        }
+//        nameLabel.snp.makeConstraints {
+//            $0.top.equalTo(view.safeAreaLayoutGuide).inset(0) // 상단 안전 영역에 정렬
+//            $0.centerX.equalTo(view.safeAreaLayoutGuide) // 가로 중앙 정렬
+//        }
         
         streamImageView.snp.makeConstraints {
-            $0.top.equalTo(nameLabel.snp.bottom).offset(20) // 레이블 아래 정렬
-            $0.left.right.equalToSuperview().inset(20) // 좌우 20만큼 여백
-            $0.height.equalTo(streamImageView.snp.width).multipliedBy(0.75) // 4:3 비율
+            $0.center.equalToSuperview() // center는 centerX와 centerY 모두 설정
+            $0.width.equalToSuperview().inset(20)
+            $0.height.equalTo(streamImageView.snp.width).multipliedBy(0.75)
         }
     }
 }
